@@ -17,7 +17,7 @@ import {
   Textarea,
   Text
 } from "@chakra-ui/react";
-import Header from "components/Header";
+import Header from "../../components/Header";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import frontImage from "../../assets/illustration.webp";

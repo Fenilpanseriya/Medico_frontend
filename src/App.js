@@ -4,11 +4,11 @@ import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
 import Home from './components/Home/Home';
 import Login from './components/authentication/Login';
 import Signup from './components/authentication/Signup';
-import AuthFormat from 'components/authentication/AuthFormat';
+import AuthFormat from "./components/authentication/AuthFormat"
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{height:"100vh"}}>
       <Router>
         <Routes>
           <Route path='/' element={<Home/>}/>

@@ -1,0 +1,2 @@
+export const cities=["Surat","Junagadh","Ahmedabad","Gandhinagar","Rajkot","Jamnagar","Somnath","Keshod","Veraval","Mehsana","Baroda","Vadodara","Nsavsari","Dang","Patan","Morbi","Gondal","Porbandar","Dwarka","Amreli","Bhavnagar","Nadiad","Anand","Vapi","Bharuch","Ankleshwar","Chotila","Diu","Kutch"]
+export const profession=["Dentist","Ear-Nose-Throt(Ent)","Dermetologist","Radiologist","Pethologist","Neurologist","MBBS","M.D Physian","Gastrologist","Gynecologist","BHMS","BAMS"]

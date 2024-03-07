@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import {Stack,Image,VStack,Heading,FormControl,FormLabel,Input , HStack, Button} from "@chakra-ui/react"
 import { Link } from 'react-router-dom';
-import Header from "components/Header";
+import Header from '../Header';
 import frontImage from "../../assets/illustration.webp";
 const Login = () => {
   const [formData, setFormData] = useState({
