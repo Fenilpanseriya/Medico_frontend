@@ -4,6 +4,7 @@ import Banner from './Banner'
 import Search from './Search'
 import Servicescard from './Servicescard'
 import About from './About'
+import Footer from '../Footer'
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
         <Banner/>
         <Servicescard/>
         <About/>
+        <Footer/>
     </div>
     
   )

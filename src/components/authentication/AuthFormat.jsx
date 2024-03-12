@@ -15,18 +15,22 @@ import {
   Button,
   Select,
   Textarea,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import Header from "../../components/Header";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import frontImage from "../../assets/illustration.webp";
-const AuthFormat = ({role=""}) => {
+import view from "../../assets/view.png";
+import hide from "../../assets/hide.png";
+import { authfields } from "./authFields";
+const AuthFormat = ({ role = "" }) => {
+  const [toggle, setToggle] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     name: "",
-    experience:"",
+    experience: "",
     age: "",
     birthdate: "",
     gender: "",
@@ -112,25 +116,39 @@ const AuthFormat = ({role=""}) => {
             color={"blue.700"}
           />
           <HStack justifyContent={"flex-end"}>
-            {
-              role==="doctor"? <>
-              <h2 style={{fontSize:"1rem",fontWeight:"600"}}>1000+ Doctors Joined </h2>
-              <HStack spacing={0} direction={"row"}>
-                <Text children="Helth" color={"blue.600"} fontWeight={"bold"} fontSize={"1rem"}/>
-                <Text children="Plus+" color={"blue.900"} fontWeight={"bold"}  fontSize={"1rem"} p={0}/>
-              </HStack>
-              </>:<>
-                <p style={{ color: "black" ,fontWeight:"bold"}}>Are you Doctor? </p>
+            {role === "doctor" ? (
+              <>
+                <h2 style={{ fontSize: "1rem", fontWeight: "600" }}>
+                  1000+ Doctors Joined{" "}
+                </h2>
+                <HStack spacing={0} direction={"row"}>
+                  <Text
+                    children="Helth"
+                    color={"blue.600"}
+                    fontWeight={"bold"}
+                    fontSize={"1rem"}
+                  />
+                  <Text
+                    children="Plus+"
+                    color={"blue.900"}
+                    fontWeight={"bold"}
+                    fontSize={"1rem"}
+                    p={0}
+                  />
+                </HStack>
+              </>
+            ) : (
+              <>
+                <p style={{ color: "black", fontWeight: "bold" }}>
+                  Are you Doctor?{" "}
+                </p>
                 <Link to={"/signup/doctor"}>
                   <Button variant={"link"} padding={"0.25rem"}>
                     Register Here
                   </Button>
-            </Link>
-              
-            </>
-              
-            }
-            
+                </Link>
+              </>
+            )}
           </HStack>
           <form onSubmit={handleSubmit}>
             <FormControl isRequired mt={8}>
@@ -144,74 +162,58 @@ const AuthFormat = ({role=""}) => {
                 onChange={handleImage}
               />
             </FormControl>
-            <FormControl isRequired>
-              <FormLabel>Email</FormLabel>
-              <Input
-                type="email"
-                name="email"
-                _hover={{ borderBottom: "2px solid rgba(126, 159, 251)" }}
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </FormControl>
+            {authfields.map((field, index) => {
+              let ext = field.name;
+              return (
+                <HStack
+                  width={"full"}
+                  spacing={"1rem"}
+                  key={index}
+                  m={"0.5rem"}
+                >
+                  <FormControl isRequired={field.required}>
+                    <FormLabel>{field.label}</FormLabel>
+                    <Input
+                      type={
+                        field.type === "password"
+                          ? !toggle
+                            ? "text"
+                            : "password"
+                          : field.type
+                      }
+                      name={field.name}
+                      _hover={field._hover}
+                      value={formData[ext]}
+                      onChange={handleChange}
+                      required
+                    />
+                  </FormControl>
+                  {field.name === "password" && (
+                    <Image
+                      src={!toggle ? view : hide}
+                      alt="view"
+                      height={"5%"}
+                      width={"5%"}
+                      mt={"2rem"}
+                      onClick={() => setToggle((prev) => !prev)}
+                    />
+                  )}
+                </HStack>
+              );
+            })}
 
-            <FormControl isRequired>
-              <FormLabel>Password</FormLabel>
-              <Input
-                type="password"
-                name="password"
-                _hover={{ borderBottom: "2px solid rgba(126, 159, 251)" }}
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
-            </FormControl>
-
-            <FormControl isRequired>
-              <FormLabel>Name</FormLabel>
-              <Input
-                type="text"
-                name="name"
-                _hover={{ borderBottom: "2px solid rgba(126, 159, 251)" }}
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-            </FormControl>
-
-            <FormControl isRequired>
-              <FormLabel>Age</FormLabel>
-              <Input
-                type="number"
-                name="age"
-                _hover={{ borderBottom: "2px solid rgba(126, 159, 251)" }}
-                value={formData.age}
-                onChange={handleChange}
-              />
-            </FormControl>
-            {
-              role==="doctor" && <FormControl isRequired>
-              <FormLabel>Age</FormLabel>
-              <Input
-                type="number"
-                name="experience"
-                _hover={{ borderBottom: "2px solid rgba(126, 159, 251)" }}
-                value={formData.experience}
-                onChange={handleChange}
-              />
-            </FormControl>
-            }
-            <FormControl isRequired>
-              <FormLabel>Birthdate</FormLabel>
-              <Input
-                type="date"
-                name="birthdate"
-                _hover={{ borderBottom: "2px solid rgba(126, 159, 251)" }}
-                value={formData.birthdate}
-                onChange={handleChange}
-              />
-            </FormControl>
+            {role === "doctor" && (
+              <FormControl isRequired>
+                <FormLabel>Experience</FormLabel>
+                <Input
+                  type="number"
+                  name="experience"
+                  _hover={{ borderBottom: "2px solid rgba(126, 159, 251)" }}
+                  value={formData.experience}
+                  onChange={handleChange}
+                />
+              </FormControl>
+            )}
 
             <FormControl isRequired>
               <FormLabel>Gender</FormLabel>
@@ -226,30 +228,30 @@ const AuthFormat = ({role=""}) => {
                 <option value="other">Other</option>
               </Select>
             </FormControl>
-            {
-              role==="doctor" && <FormControl isRequired>
-              <FormLabel>Doctor Degree</FormLabel>
-              <Menu>
-                <MenuButton as={Button} rightIcon="chevron-down">
-                  Select degrees
-                </MenuButton>
-                <MenuList>
-                  {doctorDegreeOptions.map((degree) => (
-                    <Checkbox
-                      padding={"0.2rem"}
-                      key={degree}
-                      value={degree}
-                      isChecked={formData.doctorDegree.includes(degree)}
-                      onChange={() => handleDegreeChange(degree)}
-                    >
-                      {degree}
-                    </Checkbox>
-                  ))}
-                </MenuList>
-              </Menu>
-            </FormControl>
-            }
             
+            {role === "doctor" && (
+              <FormControl isRequired>
+                <FormLabel>Doctor Degree</FormLabel>
+                <Menu>
+                  <MenuButton as={Button} rightIcon="chevron-down">
+                    Select degrees
+                  </MenuButton>
+                  <MenuList>
+                    {doctorDegreeOptions.map((degree) => (
+                      <Checkbox
+                        padding={"0.2rem"}
+                        key={degree}
+                        value={degree}
+                        isChecked={formData.doctorDegree.includes(degree)}
+                        onChange={() => handleDegreeChange(degree)}
+                      >
+                        {degree}
+                      </Checkbox>
+                    ))}
+                  </MenuList>
+                </Menu>
+              </FormControl>
+            )}
 
             <FormControl isRequired>
               <FormLabel>Address</FormLabel>
@@ -260,7 +262,7 @@ const AuthFormat = ({role=""}) => {
                 onChange={handleChange}
               />
             </FormControl>
-            
+
             <Button
               mb="4"
               mt={"4"}

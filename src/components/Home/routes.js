@@ -10,7 +10,7 @@ export const routes=[
     },
 
     {
-      url:"/doctors",
+      url:"/finddoctor",
       text:"Doctors"
     }
     ,
