@@ -16,8 +16,8 @@ const Servicescard = () => {
     <Stack direction={["column","row"]} spacing={"1rem"}maxWidth={"1250px"} margin={"0 auto"} justifyContent={"cennter"} height={"max-content"} marginTop={"2rem"} mb={"5rem"}  >
         {
           cardImages.map((img,index)=>(
-            <Link to={cardRoutes[index]} key={index} width={"25%"} style={{height:"max-content"}} className='card'>
-              <VStack spacing={"0.5rem"} padding={"0.25rem"}  width={"100%"} className='card' margin={["1rem","0 auto"]} justifyContent={"center"} style={{height:"max-content"}}>
+            <Link to={cardRoutes[index]} key={index} width={"25%"} style={{minHeight:"290px"}} className='card'>
+              <VStack spacing={"0.5rem"} padding={"0.25rem"}  width={"100%"} className='card' margin={["1rem","0 auto"]} justifyContent={"center"} style={{height:"100%"}}>
                 <Image src={img} alt="services"  borderRadius={"3%"}  _hover={{borderBottom:"4px solid rgba(126, 159, 251, 0.9)" }}width={"100%"} className='vg'/>
                 <Heading children={cardheadings[index]} color={"blue.600"}/>
                 <Text>

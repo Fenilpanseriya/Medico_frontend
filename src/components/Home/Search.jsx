@@ -4,11 +4,12 @@ import { cities } from "./constant";
 import { profession as Doctors } from "./constant";
 import "../../App.css"
 import { useNavigate } from "react-router";
+import axios from "axios";
 const Search = () => {
     const [city, setCity] = useState("");
     const [profession, setProfession] = useState("");
-
-   
+    const [location,setLocation]=useState("")
+    const [degree,setDegree]=useState([])
     let navigate=useNavigate();
 
     const navigatePage=()=>{
@@ -17,11 +18,13 @@ const Search = () => {
             navigate(`/finddoctor/${city}/${profession}`)
         }
     }
+
     
     navigatePage()
     useEffect(()=>{
         console.log(city)
         console.log(profession)
+        
     },[])
 return (
     <Stack
@@ -50,11 +53,8 @@ return (
             </datalist>
 
         </VStack>
-   
-     
-     
     </Stack>
-  );
+);
 };
 
 export default Search

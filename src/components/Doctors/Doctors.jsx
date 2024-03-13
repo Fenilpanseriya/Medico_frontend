@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
-import axios from 'axios';
 import Doctorcard from './Doctorcard';
-import { Alldoctor } from './dummy.js';
+import doctor1 from "../../assets/doctor1.png"
 import { useParams } from 'react-router';
 import { Stack ,Spinner} from '@chakra-ui/react';
-const Doctors = ({location="",degree=""}) => {
+import { Axios } from '../../Axios';
+const Doctors = () => {
     const [loading,setLoading]=useState(false);
     const [error,setError]=useState("")
-    const [doctors,setDoctors]=useState(Alldoctor)
+    const [doctors1,setDoctors]=useState()
     const params=useParams();
     useEffect(()=>{
         
@@ -19,21 +19,21 @@ const Doctors = ({location="",degree=""}) => {
         (async()=>{
 
             try {
-                // const controller=new AbortController()
-                // const signal=controller.signal;
+                const controller=new AbortController()
+                const signal=controller.signal;
 
-                // const response=await axios.get(`/finddoctor/${params.location}/${params.degree}`,{signal});
-                // if(response.success){
-                //     console.log(response.data);
-                //     setDoctors(response.data)
-                // }
-                if(params.location || params.degree){
-                    const locationRegex=`/${params.location}/`
-                    const degreeRegex=`/${params.degree}/`
-                    const data=Alldoctor.slice()?.filter((doc)=>(degreeRegex.match(doc.degree) && locationRegex.match(doc.location)));
-                    console.log(JSON.stringify(data));
-                    setDoctors(data);
+                const response=await Axios.get(`/doctor?location=${params.location}&degree=${params.degree}`,{signal,withCredentials:true});
+                if(response.status===200){
+                    console.log(response.data.doctors);
+                    setDoctors(response.data.doctors)
                 }
+                // if(params.location || params.degree){
+                //     const locationRegex=`/${params.location}/`
+                //     const degreeRegex=`/${params.degree}/`
+                //     const data1=doctors.slice()?.filter((doc)=>(degreeRegex.match(doc.doctorDegree) && locationRegex.match(doc.doctorAddress)));
+                //     console.log(JSON.stringify(data1));
+                //     setDoctors(data1);
+                // }
                 
                 setLoading(false)
             } catch (error) {
@@ -59,8 +59,8 @@ const Doctors = ({location="",degree=""}) => {
             size='xl'
         /> :<Stack mt={"2rem"} padding={"1rem"} direction={"column"}>
             {
-                doctors?.map((doctor)=>(
-                    <Doctorcard key={doctor._id} name={doctor.name} photo={doctor.url.doctor1} degree={doctor.degree} experience={doctor.experience} fees={doctor.fees}/>
+                doctors1?.map((doctor)=>(
+                    <Doctorcard key={doctor._id} name={doctor.name} photo={doctor1} degree={doctor.doctorDegree} experience={doctor.experience} fees={doctor.fees}  id={doctor._id}/>
                 ))
             }
         </Stack>
