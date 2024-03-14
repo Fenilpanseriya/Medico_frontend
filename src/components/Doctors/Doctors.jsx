@@ -4,12 +4,13 @@ import Footer from '../Footer'
 import Doctorcard from './Doctorcard';
 import doctor1 from "../../assets/doctor1.png"
 import { useParams } from 'react-router';
-import { Stack ,Spinner} from '@chakra-ui/react';
+import { Stack ,Spinner,Text} from '@chakra-ui/react';
 import { Axios } from '../../Axios';
+
 const Doctors = () => {
     const [loading,setLoading]=useState(false);
     const [error,setError]=useState("")
-    const [doctors1,setDoctors]=useState()
+    const [doctors1,setDoctors]=useState([])
     const params=useParams();
     useEffect(()=>{
         
@@ -59,9 +60,13 @@ const Doctors = () => {
             size='xl'
         /> :<Stack mt={"2rem"} padding={"1rem"} direction={"column"}>
             {
-                doctors1?.map((doctor)=>(
+                doctors1.length>0 ? doctors1?.map((doctor)=>(
                     <Doctorcard key={doctor._id} name={doctor.name} photo={doctor1} degree={doctor.doctorDegree} experience={doctor.experience} fees={doctor.fees}  id={doctor._id}/>
                 ))
+                :
+                <Text fontSize={"2rem"} textAlign={"center"} sx={{opacity:0.7}} color={"#1A365D"}>
+                    OOPS!! No Doctors Available for Your Search
+                </Text>
             }
         </Stack>
         }

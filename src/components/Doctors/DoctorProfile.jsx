@@ -5,6 +5,7 @@ import Header from '../Header';
 import { Search } from '@mui/icons-material';
 import doctor1 from "../../assets/doctor1.png"
 import Doctorcard from './Doctorcard';
+import { Typography } from '@mui/material';
 const DoctorProfile = () => {
     const params=useParams();
     const [doctor,setDoctor]=useState(null)
@@ -33,7 +34,9 @@ const DoctorProfile = () => {
     <>
     <Header/>
     <Search/>
-    {doctor && <Doctorcard name={doctor.name} photo={doctor1} experience={doctor.experience} fees={doctor.fees} degree={doctor.doctorDegree} address={doctor.doctorAddress}/>}
+    {doctor && <Doctorcard name={doctor.name} photo={doctor1} experience={doctor.experience} fees={doctor.fees} degree={doctor.doctorDegree} address={doctor.doctorAddress}/>
+    
+    }
     </>
   )
 }

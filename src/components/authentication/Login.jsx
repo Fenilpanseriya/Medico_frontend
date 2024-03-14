@@ -1,9 +1,15 @@
 import React,{useState} from 'react'
-import {Stack,Image,VStack,Heading,FormControl,FormLabel,Input , HStack, Button} from "@chakra-ui/react"
-import { Link } from 'react-router-dom';
+import {Stack,Image,VStack,Heading,FormControl,FormLabel,Input , HStack, Button,Text} from "@chakra-ui/react"
+import { Link, useLocation } from 'react-router-dom';
 import Header from '../Header';
 import frontImage from "../../assets/illustration.webp";
+import Doctornavigator from './Doctornavigator';
+import AdminNavigator from './AdminNavigator';
+import PatientNavigator from './PatientNavigator';
 const Login = () => {
+
+  const location=useLocation();
+  console.log(location)
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -52,6 +58,50 @@ const Login = () => {
             textAlign={"center"}
             color={"blue.700"}
           />
+          <VStack >
+            <HStack justifyContent={"flex-end"}>
+            {location?.pathname !== "/login" && (
+              <>
+                <h2 style={{ fontSize: "1.5rem", fontWeight: "600" }}>
+                  {location?.pathname==="/doctor-login"?"1000+ Doctors Joined ":"Welcome Admin!! Please Login Here"}
+                  
+                </h2>
+                {location?.pathname==="/doctor-login" && <HStack spacing={0} direction={"row"}>
+                  <Text
+                    children="Helth"
+                    color={"blue.600"}
+                    fontWeight={"bold"}
+                    fontSize={"1.5rem"}
+                  />
+                  <Text
+                    children="Plus+"
+                    color={"blue.900"}
+                    fontWeight={"bold"}
+                    fontSize={"1.5rem"}
+                    p={0}
+                  />
+                </HStack>
+                }
+              </>
+            ) }
+              
+            </HStack>
+            <>
+              <Stack direction={["column","row"]} spacing={"1rem"}>
+                {
+                  location.pathname==="/login"&&<><Doctornavigator/><AdminNavigator/></>
+                }
+                {
+                  location.pathname==="/doctor-login" && <><PatientNavigator/><AdminNavigator/></>
+                }
+                {
+                  location.pathname==="/admin-login" && <><PatientNavigator/><Doctornavigator/></>
+                }
+              </Stack>
+              
+              </>
+            
+          </VStack>
           <form onSubmit={handleSubmit}>
 
           <FormControl isRequired>

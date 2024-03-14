@@ -138,23 +138,43 @@ const AuthFormat = ({ role = "" }) => {
                 </HStack>
               </>
             ) : (
-              <>
-                <p style={{ color: "black", fontWeight: "bold" }}>
-                  Are you Doctor?{" "}
-                </p>
-                <Link to={"/signup/doctor"}>
-                  <Button variant={"link"} padding={"0.25rem"}>
-                    Register Here
-                  </Button>
-                </Link>
-              </>
+              <HStack>
+                <VStack>
+                  <p style={{ color: "black", fontWeight: "bold" }}>
+                    Are you Doctor?{" "}
+                  </p>
+                  <Link to={"/signup/doctor"}>
+                    <Button variant={"link"} padding={"0.25rem"}>
+                      Register Here
+                    </Button>
+                  </Link>
+                </VStack>
+
+                {
+                  role!=="admin" && <VStack>
+                  <p style={{ color: "black", fontWeight: "bold" }}>
+                    Are you Admin?{" "}
+                  </p>
+                  <Link to={"/signup/admin"}>
+                    <Button variant={"link"} padding={"0.25rem"}>
+                      Register Here
+                    </Button>
+                  </Link>
+                </VStack>
+                }
+
+              </HStack>
+
+                
             )}
           </HStack>
           <form onSubmit={handleSubmit}>
+
             <FormControl isRequired mt={8}>
               <FormLabel>Avatar</FormLabel>
-              <Avatar name="avatar" src={formData.avatar} />
+              <Avatar name="avatar" src={formData.avatar} height={"10vw"} width={"10vw"}/>
               <Input
+                mt={"0.5rem"}
                 type="file"
                 name="avatar"
                 accept="image/*"
@@ -162,6 +182,7 @@ const AuthFormat = ({ role = "" }) => {
                 onChange={handleImage}
               />
             </FormControl>
+
             {authfields.map((field, index) => {
               let ext = field.name;
               return (
