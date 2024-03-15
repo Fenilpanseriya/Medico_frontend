@@ -6,9 +6,12 @@ import Header from '../Header'
 import { Link } from 'react-router-dom'
 import AddHospital from './AddHospital'
 const AdminProfile = () => {
+
     const[age,setAge]=useState(null)
     const [openModal,setOpenModal]=useState(false)
+    const [selectedOptions, setSelectedOptions] = useState([]);
     const { isOpen, onOpen, onClose }=useDisclosure();
+
     function calculateAge(birthdate) {
         const today = moment();
         const birthdateMoment = moment(birthdate);
@@ -25,7 +28,7 @@ const AdminProfile = () => {
         setAge(calculateAge(admin.birthDate))
     },[])
   return (
-    <Stack spacing={"1rem"} width={"100%"} height={"100vh"}>
+    <Stack spacing={"1rem"} width={"100%"} height={"100vh"} backgroundColor={"whitesmoke"} >
         <Header/>
         <Stack direction={["column","row"]} spacing={"1rem"}  margin={"0 auto"} justifyContent={"center"} alignItems={"center"} padding={0} height={"max-content"}>
             <Image src={admin.photo.adminPhoto} top={0} height={"50%"} width={"50%"} borderRadius={"50%"} mt={"0rem"}/>
@@ -50,24 +53,25 @@ const AdminProfile = () => {
             
         </Stack>
         <Stack direction={["column","row"]} spacing={"1rem"} width={"100%"} justifyContent={"center"}>
-                <Link to={"/change-profile-photo"}>
-                    <Button variant={"ghost"} color={"blue.600"} p={4}>
-                        Change Profile Picture
-                    </Button>
-                </Link>
+                
                 <Link to={"/reset-password"} variant={"ghost"} >
-                    <Button variant={"ghost"} color={"blue.600"} p={4}>
+                    <Button variant={"solid"} colorScheme='blue' p={4}>
                         Reset Password
                     </Button>
                 </Link>
-                <Button variant={"ghost"}  color={"blue.600"} onClick={handleModal} p={4}>
+                <Link to={"/change-profile-photo"}>
+                    <Button variant={"solid"} colorScheme='blue' p={4}>
+                        Change Profile Picture
+                    </Button>
+                </Link>
+                <Button variant={"solid"}  colorScheme='blue' onClick={handleModal} p={4}>
                     Add Hospital
                 </Button>
             </Stack>
         {
-            openModal && <AddHospital isOpen={isOpen} onClose={onClose} setOpenModal={setOpenModal}/>
+            openModal && <AddHospital selectedOptions={selectedOptions} isOpen={isOpen} onClose={onClose} setOpenModal={setOpenModal} setSelectedOptions={setSelectedOptions}/>
         }
-    </Stack>
+            </Stack>
   )
 }
 

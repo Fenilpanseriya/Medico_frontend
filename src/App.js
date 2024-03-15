@@ -24,6 +24,7 @@ function App() {
           <Route path='/signup/:role' element={<Signup/>}/>
           <Route path='/signup' element={<AuthFormat/>}/>
           <Route path='/finddoctor' element={<Doctors/>}/>
+          <Route path='/getAllDoctor' element={<Doctors/>}/>
           <Route path='/admin-profile' element={<AdminProfile/>}/>
           <Route path='/finddoctor/:location/:degree' element={<Doctors />}/>
           <Route path='/doctor/profile/:id' element={<DoctorProfile/>}/>

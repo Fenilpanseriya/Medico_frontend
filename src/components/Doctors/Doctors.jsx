@@ -3,7 +3,7 @@ import Header from '../Header'
 import Footer from '../Footer'
 import Doctorcard from './Doctorcard';
 import doctor1 from "../../assets/doctor1.png"
-import { useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { Stack ,Spinner,Text} from '@chakra-ui/react';
 import { Axios } from '../../Axios';
 
@@ -12,6 +12,7 @@ const Doctors = () => {
     const [error,setError]=useState("")
     const [doctors1,setDoctors]=useState([])
     const params=useParams();
+    const url=useLocation()
     useEffect(()=>{
         
         setLoading(true);
@@ -22,12 +23,19 @@ const Doctors = () => {
             try {
                 const controller=new AbortController()
                 const signal=controller.signal;
-
-                const response=await Axios.get(`/doctor?location=${params.location}&degree=${params.degree}`,{signal,withCredentials:true});
+                let response;
+                if(url.pathname==="/getAllDoctor"){
+                    response=await Axios.get(`/getAllDoctors`,{signal,withCredentials:true});
+                }
+                else{
+                    response=await Axios.get(`/doctor?location=${params.location}&degree=${params.degree}`,{signal,withCredentials:true});
+                    
+                }
                 if(response.status===200){
                     console.log(response.data.doctors);
                     setDoctors(response.data.doctors)
                 }
+                
                 // if(params.location || params.degree){
                 //     const locationRegex=`/${params.location}/`
                 //     const degreeRegex=`/${params.degree}/`

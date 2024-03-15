@@ -13,19 +13,26 @@ import {
   Heading,
   HStack,
   Button,
-  Select,
+  Select as Selects,
   Textarea,
   Text,
 } from "@chakra-ui/react";
+import Select from 'react-select';
 import Header from "../../components/Header";
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import frontImage from "../../assets/illustration.webp";
 import view from "../../assets/view.png";
 import hide from "../../assets/hide.png";
 import { authfields } from "./authFields";
+import {options} from "../Admin/hospitals"
+import { ButtonBase } from "@mui/material";
+
+
 const AuthFormat = ({ role = "" }) => {
   const [toggle, setToggle] = useState(false);
+  const [hospital,setHospital]=useState([{value:"Shreeji Hospital",label:"Shreeji Hospital"}])
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -37,6 +44,7 @@ const AuthFormat = ({ role = "" }) => {
     address: "",
     avatar: "",
     doctorDegree: [],
+    hospital:[]
   });
 
   const handleDegreeChange = (degree) => {
@@ -76,12 +84,32 @@ const AuthFormat = ({ role = "" }) => {
     };
     reader.readAsDataURL(file);
   };
-
+  const handleChangeHospital = (selectedValues) => {
+    setSelectedOptions(selectedValues);
+    setFormData({
+      ...formData,
+      hospital: [...formData.hospital, selectedValues],
+    });
+    console.log(selectedOptions)
+};
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission here
     console.log("FORM DATA IS " + JSON.stringify(formData));
   };
+
+  const fetchHospitals = useMemo(() => {
+    return (allHospital) => {
+      const latestHospitals = allHospital?.map(item => ({ value: item, label: item }));
+      return latestHospitals;
+    };
+  }, [hospital]);
+
+  useEffect(() => {
+    const hospitalsFromLocalStorage = localStorage.getItem("hospitals") ? JSON.parse(localStorage.getItem("hospitals")) : ["Shreeji Hospital"];
+    setHospital(fetchHospitals(hospitalsFromLocalStorage));
+  }, []);
+  
 
   return (
     <>
@@ -223,7 +251,7 @@ const AuthFormat = ({ role = "" }) => {
               );
             })}
 
-            {role === "doctor" && (
+            {role === "doctor" && (<>
               <FormControl isRequired>
                 <FormLabel>Experience</FormLabel>
                 <Input
@@ -234,11 +262,22 @@ const AuthFormat = ({ role = "" }) => {
                   onChange={handleChange}
                 />
               </FormControl>
+              <FormControl isRequired>
+                <FormLabel>Hospitals </FormLabel>
+                <Select
+                  options={hospital}
+                  value={selectedOptions}
+                  isMulti
+                  onChange={handleChangeHospital}
+                />
+              </FormControl>
+              
+              </>
             )}
 
             <FormControl isRequired>
               <FormLabel>Gender</FormLabel>
-              <Select
+              <Selects
                 name="gender"
                 _hover={{ borderBottom: "2px solid rgba(126, 159, 251)" }}
                 value={formData.gender}
@@ -247,7 +286,7 @@ const AuthFormat = ({ role = "" }) => {
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="other">Other</option>
-              </Select>
+              </Selects>
             </FormControl>
             
             {role === "doctor" && (
@@ -280,7 +319,7 @@ const AuthFormat = ({ role = "" }) => {
                 _hover={{ borderBottom: "2px solid rgba(126, 159, 251)" }}
                 name="address"
                 value={formData.address}
-                onChange={handleChange}
+                onChange={handleChangeHospital}
               />
             </FormControl>
 

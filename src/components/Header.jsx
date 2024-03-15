@@ -36,7 +36,7 @@ const Header = () => {
   }, []);
 
   return (
-    <Box width={"full"} backgroundColor={"whitesmoke"} padding={"3rem 0"} justifyContent={"center"}  style={{boxSizing:"border-box"}}>
+    <Box width={"full"} backgroundColor={"#eef4f9"} padding={"3rem 0"} justifyContent={"center"}  style={{boxSizing:"border-box"}}>
         <Box maxWidth={"1250px"} width={"95%"} margin={"0 auto"}>
             <div style={{display:'flex',flexWrap:'wrap',justifyContent:"space-between",width:"100%"}}>
               <Stack direction={"row"} spacing={0} alignItems={"center"}>
