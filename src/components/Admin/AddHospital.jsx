@@ -58,7 +58,7 @@ const AddHospital = ({selectedOptions=[],isOpen,onClose,setOpenModal,setSelected
             <ModalContent>
                 <ModalCloseButton/>
                 <ModalBody>
-                    <Heading  py="4" children="Add Hospital" textColor={"purple.500"} fontSize={"large"}/>
+                    <Heading  py="4" children="Add Hospital" textColor={"purple.500"} fontSize={"large"} textAlign={"center"}/>
                     <form  py="3" onSubmit={addHospitalHandler}>
                         
                         <Input placeholder='Hospital Name' type="text"   m={"1.5"} value={hospitalName} onChange={(e)=>setHospitalName(e.target.value)} />

@@ -27,9 +27,12 @@ const Doctorcard = ({
         direction={["column", "row"]}
         padding={["4", "8"]}
         _hover={{ backgroundColor: "whitesmoke" }}
+        maxWidth={"1250px"}
+        pl={"0"}
+        margin={"0 auto"}
       >
-        <Image src={photo} alt="doctor photo" height={"18vh"} width={"20vw"} />
-        <VStack spacing={"1rem"} alignItems={"flex-start"}>
+        <Image src={photo} alt="doctor photo" height={"18vh"} width={"20vw"} alignSelf={["center","flex-start"]}/>
+        <VStack spacing={"1rem"} alignItems={["center","flex-start"]}>
           <Heading children="Unknown" color={"#1A365D"} />
           {address && <Text>{`Address: ${address}`}</Text>}
           <Text>{`Degree : ${degree}`}</Text>

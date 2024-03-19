@@ -162,6 +162,38 @@ textarea:focus, input:focus{
 .fa-icon {
   color:rgba(64, 112, 243, 0.9);
 }
+
+.prev-arrow{
+  left:0;
+  background-color: #1A8EFD;
+  color: "black";
+}
+
+.next-arrow{
+  right:0;
+  background-color: #1A8EFD;
+  color: "black";
+}
+.date-card .selected{
+  padding-top: "1.25rem";
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.selected{
+  border-bottom: 4px solid #1A8EFD;
+  background-color:#bdd8fd
+}
+
+.slick-next{
+  padding-top: 0;
+  position: absolute;
+}
+.slick-prev{
+  padding-top: 0;
+  position: absolute;
+}
+
+
 /* Responsive */
 @media screen and (max-width: 1000px) {
   .about-section {
