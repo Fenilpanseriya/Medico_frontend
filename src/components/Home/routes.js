@@ -23,5 +23,5 @@ export const routes=[
     {
       url:"/login",
       text:"SignUp/Login"
-    },
+    }
   ]

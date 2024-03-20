@@ -1,14 +1,17 @@
-import React,{useState} from 'react'
+import React,{useContext, useState} from 'react'
 import {Stack,Image,VStack,Heading,FormControl,FormLabel,Input , HStack, Button,Text} from "@chakra-ui/react"
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Header from '../Header';
 import frontImage from "../../assets/illustration.webp";
 import Doctornavigator from './Doctornavigator';
 import AdminNavigator from './AdminNavigator';
 import PatientNavigator from './PatientNavigator';
-const Login = () => {
-
+import { Axios } from '../../Axios';
+import { AuthContext } from '../../AuthProvider';
+const Login = ({role=""}) => {
+  const navigate=useNavigate();
   const location=useLocation();
+  const {  login } = useContext(AuthContext);
   console.log(location)
   const [formData, setFormData] = useState({
     email: "",
@@ -21,9 +24,25 @@ const Login = () => {
       [name]: value,
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     console.log("FORM DATA IS " + JSON.stringify(formData));
+      let url=location.pathname==="/doctor-login"?"/loginDoctor":"/login"
+      let response=await Axios.post(url,formData,{
+        headers:{
+          "Content-Type":"application/json"
+        },
+        withCredentials:true
+      })
+      if(response.data.success){
+        login();
+        sessionStorage.setItem("status","login")
+        navigate("/")
+      }
+      else{
+        alert(response.data.message);
+      }
+    
   };
  
   return (

@@ -20,26 +20,30 @@ import {
 import Select from 'react-select';
 import Header from "../../components/Header";
 import React, { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import frontImage from "../../assets/illustration.webp";
 import view from "../../assets/view.png";
 import hide from "../../assets/hide.png";
 import { authfields } from "./authFields";
-import {options} from "../Admin/hospitals"
-import { ButtonBase } from "@mui/material";
+
+import { Axios } from "../../Axios";
+
 
 
 const AuthFormat = ({ role = "" }) => {
   const [toggle, setToggle] = useState(false);
   const [hospital,setHospital]=useState([{value:"Shreeji Hospital",label:"Shreeji Hospital"}])
   const [selectedOptions, setSelectedOptions] = useState([]);
+  
+  const navigate=useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     name: "",
     experience: "",
     age: "",
-    birthdate: "",
+    birthDate: "",
+    phoneNumber:"",
     gender: "",
     address: "",
     avatar: "",
@@ -60,19 +64,24 @@ const AuthFormat = ({ role = "" }) => {
       });
     }
   };
+
   const doctorDegreeOptions = [
-    "MD",
-    "PhD",
-    "MBBS",
-    // Add more degree options as needed
+    "MD","Dermetologist",
+    "Dentist",
+    "MBBS","Nuerologist",
+    "ENT","Radiology"
+    
   ];
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name,value)
     setFormData({
       ...formData,
       [name]: value,
     });
+    console.log(formData)
   };
+
   const handleImage = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -84,6 +93,7 @@ const AuthFormat = ({ role = "" }) => {
     };
     reader.readAsDataURL(file);
   };
+
   const handleChangeHospital = (selectedValues) => {
     setSelectedOptions(selectedValues);
     setFormData({
@@ -92,11 +102,28 @@ const AuthFormat = ({ role = "" }) => {
     });
     console.log(selectedOptions)
 };
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("FORM DATA IS " + JSON.stringify(formData));
-  };
+    console.log((formData))
+    
+    let url=role==="doctor"?"/registerDoctor":"/register";
+  
+    const res=await Axios.post(url,formData,{
+      headers:{
+        "Content-Type": "application/json",
+      },
+      withCredentials:true
+    })
+    if(res.status===200){
+      
+      sessionStorage.setItem("status","login")
+      navigate("/")
+    }
+    else{
+      alert(res.data.message);
+    }
+  }
+  
 
   const fetchHospitals = useMemo(() => {
     return (allHospital) => {
@@ -211,6 +238,18 @@ const AuthFormat = ({ role = "" }) => {
               />
             </FormControl>
 
+            <FormControl isRequired mt={8}>
+              <FormLabel>Contact No.</FormLabel>
+             
+              <Input
+                mt={"0.5rem"}
+                type="text"
+                name="phoneNumber"
+                _hover={{ borderBottom: "2px solid rgba(126, 159, 251)" }}
+                onChange={handleChange}
+              />
+            </FormControl>
+
             {authfields.map((field, index) => {
               let ext = field.name;
               return (
@@ -282,6 +321,7 @@ const AuthFormat = ({ role = "" }) => {
                 _hover={{ borderBottom: "2px solid rgba(126, 159, 251)" }}
                 value={formData.gender}
                 onChange={handleChange}
+                
               >
                 <option value="male">Male</option>
                 <option value="female">Female</option>
@@ -319,7 +359,7 @@ const AuthFormat = ({ role = "" }) => {
                 _hover={{ borderBottom: "2px solid rgba(126, 159, 251)" }}
                 name="address"
                 value={formData.address}
-                onChange={handleChangeHospital}
+                onChange={handleChange}
               />
             </FormControl>
 

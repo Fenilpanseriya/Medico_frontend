@@ -14,11 +14,12 @@ const AppointmentModal = ({date=new Date(Date.now()).toDateString(),setTime,setO
     const bookAppointment=async(e)=>{
         e.preventDefault();
         console.log(email+" "+ phoneNumber);
+        console.log(id)
         const response=await Axios.post("/patient/book-appointment",{
             email,phoneNumber,id,time,date
         },{
             headers:{
-                "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWRlZjhjOWU5MmViMGI2YWQ5NDljNDgiLCJpYXQiOjE3MTA3NTgwMTcsImV4cCI6MTcxMjA1NDAxN30.Y5Jx0SZ3pVe_rcIi6IApqAauQjDMXPTNUGzxvwoBytY",
+                //"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWRlZjhjOWU5MmViMGI2YWQ5NDljNDgiLCJpYXQiOjE3MTA3NTgwMTcsImV4cCI6MTcxMjA1NDAxN30.Y5Jx0SZ3pVe_rcIi6IApqAauQjDMXPTNUGzxvwoBytY",
                 "Content-Type":"application/json"
             }
         })

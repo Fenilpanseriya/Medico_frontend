@@ -33,7 +33,7 @@ export const authfields=[
         required:true,
         label:"Birthdate",
         type:"date",
-        name:"birthdate",
+        name:"birthDate",
         _hover:'{{borerBottom: "2px solid rgba(126, 159, 251)"}}'
     },
     

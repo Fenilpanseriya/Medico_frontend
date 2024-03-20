@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import Header from '../Header'
 import Banner from './Banner'
 import Search from './Search'
@@ -7,9 +7,13 @@ import About from './About'
 import Footer from '../Footer'
 
 const Home = () => {
+  const [status,setStatus]=useState("logout")
+  useEffect(()=>{
+    setStatus(sessionStorage.getItem("status"))
+  },[])
   return (
     <div>
-        <Header/>
+        <Header setStatus={setStatus} status={status}/>
         <Search/>
         <Banner/>
         <Servicescard/>
