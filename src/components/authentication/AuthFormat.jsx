@@ -115,8 +115,8 @@ const AuthFormat = ({ role = "" }) => {
       withCredentials:true
     })
     if(res.status===200){
-      
-      sessionStorage.setItem("status","login")
+      localStorage.setItem("role",role===""?"user":role)
+      localStorage.setItem("status","login")
       navigate("/")
     }
     else{

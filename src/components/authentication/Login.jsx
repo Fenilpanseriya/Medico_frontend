@@ -1,4 +1,4 @@
-import React,{useContext, useState} from 'react'
+import React,{ useState} from 'react'
 import {Stack,Image,VStack,Heading,FormControl,FormLabel,Input , HStack, Button,Text} from "@chakra-ui/react"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Header from '../Header';
@@ -7,16 +7,19 @@ import Doctornavigator from './Doctornavigator';
 import AdminNavigator from './AdminNavigator';
 import PatientNavigator from './PatientNavigator';
 import { Axios } from '../../Axios';
-import { AuthContext } from '../../AuthProvider';
+
+
 const Login = ({role=""}) => {
   const navigate=useNavigate();
   const location=useLocation();
-  const {  login } = useContext(AuthContext);
+  
   console.log(location)
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -24,6 +27,7 @@ const Login = ({role=""}) => {
       [name]: value,
     });
   };
+
   const handleSubmit = async(e) => {
     e.preventDefault();
     console.log("FORM DATA IS " + JSON.stringify(formData));
@@ -35,8 +39,9 @@ const Login = ({role=""}) => {
         withCredentials:true
       })
       if(response.data.success){
-        login();
-        sessionStorage.setItem("status","login")
+        
+        localStorage.setItem("role",location.pathname==="/doctor-login"?"doctor":(location.pathname==="/login"?"user":"admin"))
+        localStorage.setItem("status","login")
         navigate("/")
       }
       else{

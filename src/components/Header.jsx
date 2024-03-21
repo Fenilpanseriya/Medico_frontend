@@ -31,7 +31,7 @@ const Header = ({setStatus,status}) => {
   const handleLogout=()=>{
     
     alert("logout done")
-    sessionStorage.setItem("status","logut")
+    localStorage.setItem("status","logut")
     setStatus("logout")
   } 
   
@@ -93,14 +93,27 @@ const Header = ({setStatus,status}) => {
                     <DrawerBody>
                       <Stack spacing={4}>
                       {
-                        routes.map((route)=>(
-                        <Link to={route.url} key={route.url}>
-                          <Button variant={"ghost"} w={"full"} color={"blue.600"} _hover={{borderBottom:"2px solid rgba(126, 159, 251, 0.8)" }} style={{textDecoration:"link",padding:"0.5rem"}} >
-                            {route.text}
-                          </Button>
-                        </Link>
-                  ))
-                }
+                        routes.map((route)=>{
+
+                          return status==="login" && route.text==="SignUp/Login"?
+                            <><Button variant={"ghost"} color={"blue.600"} _hover={{borderBottom:"2px solid rgba(126, 159, 251, 0.8)" }} style={{textDecoration:"link",padding:"0.5rem"}} onClick={handleLogout}>
+                                Logout
+                              </Button>
+                              <Link to="/profile"key="/profile">
+                                <Button variant={"ghost"} width={"full"} color={"blue.600"} _hover={{borderBottom:"2px solid rgba(126, 159, 251, 0.8)" }} style={{textDecoration:"link",padding:"0.5rem"}} >
+                                  Profile
+                                </Button>
+                              </Link>
+                            </>
+                          :(
+                            <Link to={route.url} key={route.url}>
+                              <Button variant={"ghost"} width={"full"} color={"blue.600"} _hover={{borderBottom:"2px solid rgba(126, 159, 251, 0.8)" }} style={{textDecoration:"link",padding:"0.5rem"}} >
+                                { route.text}
+                              </Button>
+                            </Link>
+                          )
+                        })
+                      }
                       </Stack>
                     </DrawerBody>
                   </DrawerContent>

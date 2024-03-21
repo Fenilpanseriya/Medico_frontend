@@ -9,7 +9,7 @@ import Footer from '../Footer'
 const Home = () => {
   const [status,setStatus]=useState("logout")
   useEffect(()=>{
-    setStatus(sessionStorage.getItem("status"))
+    setStatus(localStorage.getItem("status"))
   },[])
   return (
     <div>

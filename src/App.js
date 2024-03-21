@@ -10,9 +10,12 @@ import DoctorProfile from './components/Doctors/DoctorProfile';
 import AdminLogin from './components/Admin/AdminLogin';
 import DoctorLogin from './components/Doctors/DoctorLogin';
 import AdminProfile from './components/Admin/AdminProfile';
+import UserProfile from './components/User/UserProfile';
+import { useEffect,useState,useContext } from 'react';
 
 function App() {
- 
+
+  
   return (
     <div className="App" style={{height:"100vh"}}>
       <Router>
@@ -28,6 +31,12 @@ function App() {
           <Route path='/admin-profile' element={<AdminProfile/>}/>
           <Route path='/finddoctor/:location/:degree' element={<Doctors />}/>
           <Route path='/doctor/profile/:id' element={<DoctorProfile/>}/>
+          <Route path='/Account' element={<UserProfile url='/account'  />}/>
+          <Route path='/profile' element={<UserProfile url='/account'  />}/>
+          <Route path='/Appointments' element={<UserProfile url='/appointments'  />}/>
+          <Route path='/Medicines' element={<UserProfile url='/medicines'  />}/>
+          <Route path='/Lab-Tests' element={<UserProfile url='/labtests' />}/>
+          <Route path='/Reports' element={<UserProfile url='/reports'  />}/>
         </Routes>
       </Router>
     </div>
