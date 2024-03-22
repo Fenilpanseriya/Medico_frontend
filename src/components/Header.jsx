@@ -1,5 +1,5 @@
 import { Box, Stack ,Text,Image,Button} from '@chakra-ui/react'
-import React, { useState,useEffect} from 'react'
+import React, { useState,useEffect, useContext} from 'react'
 import health from "../assets/header_logo.png"
 import { Link } from 'react-router-dom'
 import { routes } from './Home/routes'
@@ -7,12 +7,13 @@ import "../../src/App.css"
 import { Box as Boxes} from '@mui/material'
 import {  IconButton, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody} from '@chakra-ui/react';
 import { FaBars } from 'react-icons/fa';
+import { AuthContext } from '../AuthProvider'
 
-const Header = ({setStatus,status}) => {
+const Header = ({status}) => {
   
   const [isMobile,setIsMobile]=useState(false)
   const [isOpen, setIsOpen] = useState(false);
-  
+  const {  login, logout } = useContext(AuthContext);
   
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
@@ -32,7 +33,7 @@ const Header = ({setStatus,status}) => {
     
     alert("logout done")
     localStorage.setItem("status","logut")
-    setStatus("logout")
+    logout()
   } 
   
   useEffect(() => {

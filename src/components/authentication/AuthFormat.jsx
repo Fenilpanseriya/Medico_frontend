@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 import Select from 'react-select';
 import Header from "../../components/Header";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import frontImage from "../../assets/illustration.webp";
 import view from "../../assets/view.png";
@@ -27,6 +27,7 @@ import hide from "../../assets/hide.png";
 import { authfields } from "./authFields";
 
 import { Axios } from "../../Axios";
+import { AuthContext } from "../../AuthProvider";
 
 
 
@@ -34,7 +35,7 @@ const AuthFormat = ({ role = "" }) => {
   const [toggle, setToggle] = useState(false);
   const [hospital,setHospital]=useState([{value:"Shreeji Hospital",label:"Shreeji Hospital"}])
   const [selectedOptions, setSelectedOptions] = useState([]);
-  
+  const { status, login, logout } = useContext(AuthContext);
   const navigate=useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -117,6 +118,7 @@ const AuthFormat = ({ role = "" }) => {
     if(res.status===200){
       localStorage.setItem("role",role===""?"user":role)
       localStorage.setItem("status","login")
+      login()
       navigate("/")
     }
     else{
@@ -140,7 +142,7 @@ const AuthFormat = ({ role = "" }) => {
 
   return (
     <>
-      <Header />
+      <Header status={status}/>
       <Stack
         direction={["column", "row"]} // Stack direction changes to column for small screens
         margin="0 auto"

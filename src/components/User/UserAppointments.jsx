@@ -4,7 +4,7 @@ import { Axios } from '../../Axios'
 
 const UserAppointments = () => {
 
-    const [totalAppointment,setTotalAppointment]=useState(0)
+    const [totalAppointment,setTotalAppointment]=useState(5)
 
     const countTotalAppointments=async()=>{
         try {
@@ -25,14 +25,14 @@ const UserAppointments = () => {
   return (
     <VStack width={"full"} height={"100%"} minHeight={"100vh"} spacing={"2rem"}>
         <Heading children="All Appointments" textAlign={"center"} color={"blue.900"}/>
-        <VStack overflow={"scroll"} height={"100%"}>
-            <Accordion>
+        <VStack overflow={"scroll"} height={"100%"} width={"100%"} overflowX={"hidden"} overflowY={"hidden"}>
+            <Accordion width={"100%"} allowMultiple allowToggle>
             {
                 Array.from({length:totalAppointment})?.map((_,index)=>{
-                    return <AccordionItem>
+                    return <AccordionItem width={"100%"}>
                     <h2>
-                        <AccordionButton _expanded={{ bg: 'tomato', color: 'white' }} onClick={alert(1)}>
-                            <Box as="span" flex='1' textAlign='left'>
+                        <AccordionButton _expanded={{ bg: 'tomato', color: 'white' }} width={"100%"} >
+                            <Box as="span" flex='1' textAlign='left' width={"100%"}>
                                 Click me to see a different style
                             </Box>
                         <AccordionIcon />

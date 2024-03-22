@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import Doctorcard from './Doctorcard';
@@ -6,6 +6,7 @@ import doctor1 from "../../assets/doctor1.png"
 import { useLocation, useParams } from 'react-router';
 import { Stack ,Spinner,Text} from '@chakra-ui/react';
 import { Axios } from '../../Axios';
+import { AuthContext } from '../../AuthProvider';
 
 const Doctors = () => {
     const [loading,setLoading]=useState(false);
@@ -13,6 +14,7 @@ const Doctors = () => {
     const [doctors1,setDoctors]=useState([])
     const params=useParams();
     const url=useLocation()
+    const { status } = useContext(AuthContext);
     useEffect(()=>{
         
         setLoading(true);
@@ -58,7 +60,7 @@ const Doctors = () => {
     },[params.degree,params.location])
 
     return (<>
-        <Header/>
+        <Header status={status} />
         {
             loading ? <Spinner
             thickness='4px'

@@ -12,15 +12,22 @@ import DoctorLogin from './components/Doctors/DoctorLogin';
 import AdminProfile from './components/Admin/AdminProfile';
 import UserProfile from './components/User/UserProfile';
 import { useEffect,useState,useContext } from 'react';
+import { AuthContext } from './AuthProvider';
 
 function App() {
+  // const [status,setStatus]=useState("logout")
+  //   useEffect(()=>{
+  //       setStatus(localStorage.getItem("status"))
+  //   },[])
+    const { status } = useContext(AuthContext);
+    useEffect(()=>{
 
-  
+    },[status])
   return (
     <div className="App" style={{height:"100vh"}}>
       <Router>
         <Routes>
-          <Route path='/' element={<Home/>}/>
+          <Route path='/' element={<Home status={status} />}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/admin-login' element={<AdminLogin/>}/>
           <Route path='/doctor-login' element={<DoctorLogin/>}/>
@@ -31,12 +38,12 @@ function App() {
           <Route path='/admin-profile' element={<AdminProfile/>}/>
           <Route path='/finddoctor/:location/:degree' element={<Doctors />}/>
           <Route path='/doctor/profile/:id' element={<DoctorProfile/>}/>
-          <Route path='/Account' element={<UserProfile url='/account'  />}/>
-          <Route path='/profile' element={<UserProfile url='/account'  />}/>
-          <Route path='/Appointments' element={<UserProfile url='/appointments'  />}/>
-          <Route path='/Medicines' element={<UserProfile url='/medicines'  />}/>
-          <Route path='/Lab-Tests' element={<UserProfile url='/labtests' />}/>
-          <Route path='/Reports' element={<UserProfile url='/reports'  />}/>
+          <Route path='/Account' element={<UserProfile url='/account' status={status}  />}/>
+          <Route path='/profile' element={<UserProfile url='/account' status={status} />}/>
+          <Route path='/Appointments' element={<UserProfile url='/appointments' status={status} />}/>
+          <Route path='/Medicines' element={<UserProfile url='/medicines'  status={status}/>}/>
+          <Route path='/Lab-Tests' element={<UserProfile url='/labtests' status={status}/>}/>
+          <Route path='/Reports' element={<UserProfile url='/reports'  status={status}/>}/>
         </Routes>
       </Router>
     </div>

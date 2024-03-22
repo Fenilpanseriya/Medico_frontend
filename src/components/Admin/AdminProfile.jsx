@@ -1,12 +1,13 @@
 import { HStack, Image, Stack, Text, VStack ,Button, useDisclosure} from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import moment from 'moment'
 import { admin } from './sampleAdmin'
 import Header from '../Header'
 import { Link } from 'react-router-dom'
 import AddHospital from './AddHospital'
+import { AuthContext } from '../../AuthProvider'
 const AdminProfile = () => {
-
+    const { status, login, logout } = useContext(AuthContext);
     const[age,setAge]=useState(null)
     const [openModal,setOpenModal]=useState(false)
     const [selectedOptions, setSelectedOptions] = useState([]);
@@ -29,7 +30,7 @@ const AdminProfile = () => {
     },[])
   return (
     <Stack spacing={"1rem"} width={"100%"} height={"100vh"} backgroundColor={"whitesmoke"} >
-        <Header/>
+        <Header status={status}/>
         <Stack direction={["column","row"]} spacing={"1rem"}  margin={"0 auto"} justifyContent={"center"} alignItems={"center"} padding={0} height={"max-content"}>
             <Image src={admin.photo.adminPhoto} top={0} height={"50%"} width={"50%"} borderRadius={"50%"} mt={"0rem"}/>
             <VStack spacing={"1rem"}  minWidth={"max-content"} mt={"0rem"}>

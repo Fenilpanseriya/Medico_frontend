@@ -1,4 +1,4 @@
-import React,{ useState} from 'react'
+import React,{ useContext, useState} from 'react'
 import {Stack,Image,VStack,Heading,FormControl,FormLabel,Input , HStack, Button,Text} from "@chakra-ui/react"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Header from '../Header';
@@ -7,12 +7,13 @@ import Doctornavigator from './Doctornavigator';
 import AdminNavigator from './AdminNavigator';
 import PatientNavigator from './PatientNavigator';
 import { Axios } from '../../Axios';
+import { AuthContext } from '../../AuthProvider';
 
 
 const Login = ({role=""}) => {
   const navigate=useNavigate();
   const location=useLocation();
-  
+  const { status, login, logout } = useContext(AuthContext);
   console.log(location)
 
   const [formData, setFormData] = useState({
@@ -42,6 +43,7 @@ const Login = ({role=""}) => {
         
         localStorage.setItem("role",location.pathname==="/doctor-login"?"doctor":(location.pathname==="/login"?"user":"admin"))
         localStorage.setItem("status","login")
+        login()
         navigate("/")
       }
       else{
@@ -52,7 +54,7 @@ const Login = ({role=""}) => {
  
   return (
     <>
-      <Header />
+      <Header status={status} />
       <Stack
         direction={["column", "row"]} // Stack direction changes to column for small screens
         margin="0 auto"

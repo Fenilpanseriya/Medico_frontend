@@ -6,14 +6,14 @@ import Servicescard from './Servicescard'
 import About from './About'
 import Footer from '../Footer'
 
-const Home = () => {
-  const [status,setStatus]=useState("logout")
-  useEffect(()=>{
-    setStatus(localStorage.getItem("status"))
-  },[])
+const Home = ({status}) => {
+  // const [status,setStatus]=useState("logout")
+  // useEffect(()=>{
+  //   setStatus(localStorage.getItem("status"))
+  // },[])
   return (
     <div>
-        <Header setStatus={setStatus} status={status}/>
+        <Header  status={status}/>
         <Search/>
         <Banner/>
         <Servicescard/>
