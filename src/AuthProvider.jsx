@@ -4,7 +4,7 @@ import React, { createContext, useState } from 'react';
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-    const [status, setStatus] = useState("logout");
+    const [status, setStatus] = useState(localStorage.getItem("status"));
 
     const login = () => {
         setStatus(localStorage.getItem("status"))
@@ -13,7 +13,7 @@ const AuthProvider = ({ children }) => {
     const logout = () => {
         setStatus(localStorage.getItem("status"))
     };
-
+    
     return (
         <AuthContext.Provider value={{ status, login, logout }}>
             {children}

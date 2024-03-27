@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom'
 import AddHospital from './AddHospital'
 import { AuthContext } from '../../AuthProvider'
 const AdminProfile = () => {
-    const { status, login, logout } = useContext(AuthContext);
+    //const { status, login, logout } = useContext(AuthContext);
+    let status=localStorage.getItem("status")
     const[age,setAge]=useState(null)
     const [openModal,setOpenModal]=useState(false)
     const [selectedOptions, setSelectedOptions] = useState([]);

@@ -15,14 +15,12 @@ import { useEffect,useState,useContext } from 'react';
 import { AuthContext } from './AuthProvider';
 
 function App() {
-  // const [status,setStatus]=useState("logout")
-  //   useEffect(()=>{
-  //       setStatus(localStorage.getItem("status"))
-  //   },[])
-    const { status } = useContext(AuthContext);
-    useEffect(()=>{
-
-    },[status])
+  //const [status,setStatus]=useState("logout")
+    // useEffect(()=>{
+    //     setStatus(localStorage.getItem("status"))
+    // },[])
+   const {status}=useContext(AuthContext)
+  
   return (
     <div className="App" style={{height:"100vh"}}>
       <Router>
