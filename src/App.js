@@ -14,6 +14,7 @@ import UserProfile from './components/User/UserProfile';
 import { useEffect,useState,useContext } from 'react';
 import { AuthContext } from './AuthProvider';
 
+
 function App() {
   //const [status,setStatus]=useState("logout")
     // useEffect(()=>{
@@ -42,6 +43,7 @@ function App() {
           <Route path='/Medicines' element={<UserProfile url='/medicines'  status={status}/>}/>
           <Route path='/Lab-Tests' element={<UserProfile url='/labtests' status={status}/>}/>
           <Route path='/Reports' element={<UserProfile url='/reports'  status={status}/>}/>
+          <Route path="/Appointment" element={<UserProfile url="/appointment" status={status}/>}/>
         </Routes>
       </Router>
     </div>

@@ -1,6 +1,6 @@
 import { Button, Stack, Image } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { menuItems } from "./profileMenuItems";
+import { doctorProfileItems, menuItems } from "./profileMenuItems";
 import { FaBars } from "react-icons/fa";
 import {
   Box,
@@ -47,7 +47,7 @@ const ProfileSidebar = ({ status }) => {
     >
       {!isMobile ? (
         <Box className="profile-sidebar">
-          {menuItems.map((item, index) => {
+          {(localStorage.getItem("role")==="user"?menuItems:doctorProfileItems).map((item, index) => {
             return (
               <Link to={`/${item}`}>
               <Button
@@ -81,7 +81,7 @@ const ProfileSidebar = ({ status }) => {
               <DrawerHeader>Activity</DrawerHeader>
               <DrawerBody>
                 <Stack spacing={4}>
-                  {menuItems.map((item, index) => {
+                  {(localStorage.getItem("role")==="user"?menuItems:doctorProfileItems).map((item, index) => {
                     return (
                       <Link to={`/${item}`}>
                       <Button

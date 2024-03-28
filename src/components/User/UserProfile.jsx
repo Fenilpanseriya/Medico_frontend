@@ -8,6 +8,7 @@ import LabTests from './LabTests'
 import UserAppointments from './UserAppointments'
 import Medicines from './Medicines'
 import { AuthContext } from '../../AuthProvider'
+import DoctorAppointment from './DoctorAppointment'
 const UserProfile = ({url="/account",status}) => {
     // const [status,setStatus]=useState("logout")
     // useEffect(()=>{
@@ -35,6 +36,9 @@ const UserProfile = ({url="/account",status}) => {
                 }
                 {
                     url==="/medicines" && <Medicines/>
+                }
+                {
+                    url==="/appointment" && <DoctorAppointment/>
                 }
 
             </Box>   
