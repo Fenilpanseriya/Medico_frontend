@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { memo, useContext, useEffect, useState } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import Doctorcard from './Doctorcard';
@@ -89,4 +89,4 @@ const Doctors = () => {
     
 )}
 
-export default Doctors
+export default memo(Doctors)

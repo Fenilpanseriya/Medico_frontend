@@ -61,6 +61,10 @@ const UserAppointments = () => {
                                 <Text>Doctor Name :- </Text>
                                 <Text>{appointment.doctor}</Text>
                             </HStack>
+                            <HStack>
+                                <Text>NextAppointment :- </Text>
+                                <Text>{appointment.__parentArray[index++].nextVisitTime}</Text>
+                            </HStack>
                         </VStack>
                     </AccordionPanel>
                 </AccordionItem>

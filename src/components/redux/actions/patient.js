@@ -6,6 +6,9 @@ export const fetchAppointments=()=>async(dispatch)=>{
         dispatch(fetchAppointmentRequest())
         let response=await Axios.get("/total-appointments",{
             withCredentials:true,
+            params:{
+                role:localStorage.getItem("role")
+            }
         })
         if(response.status===200){
             dispatch(fetchAppointmentSuccess(response.data.appointments))
