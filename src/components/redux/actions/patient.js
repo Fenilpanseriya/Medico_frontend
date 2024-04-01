@@ -12,6 +12,7 @@ export const fetchAppointments=()=>async(dispatch)=>{
         })
         if(response.status===200){
             dispatch(fetchAppointmentSuccess(response.data.appointments))
+            console.log(response.data.appointments)
             // setTotalAppointment(response.data.count);
             // setAllAppointments(response.data.appointments)
         }

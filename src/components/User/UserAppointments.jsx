@@ -1,4 +1,4 @@
-import { Accordion,Text, AccordionButton,Box, AccordionIcon, AccordionItem, AccordionPanel, Heading, VStack, HStack } from '@chakra-ui/react'
+import { Accordion,Text, AccordionButton,Box, AccordionIcon, AccordionItem, AccordionPanel, Heading, VStack, HStack, Spinner } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { Axios } from '../../Axios'
 import { useDispatch, useSelector } from 'react-redux'
@@ -37,9 +37,10 @@ const UserAppointments = () => {
         <VStack overflow={"scroll"} height={"100%"} width={"100%"} overflowX={"hidden"} overflowY={"hidden"}>
             <Accordion width={"100%"} allowMultiple allowToggle>
             {
-                appointments?.map((appointment,index)=>{
+                appointments?.length>0 ? appointments.map((appointment,index)=>{
                     return <AccordionItem width={"100%"}>
                     <h2>
+                        
                         <AccordionButton _expanded={{ bg: '#1A8EFD', color: 'white' }} width={"100%"} >
                             <Box as="span" flex='1' textAlign='left' width={"100%"}>
                                 Appointment {index+1}
@@ -51,11 +52,11 @@ const UserAppointments = () => {
                         <VStack spacing={"0.25rem"}>
                             <HStack>
                                 <Text>Appontment Date :- </Text>
-                                <Text>{appointment.__parentArray[index++].appointmentDate}</Text>
+                                <Text>{appointment.appointmentDate}</Text>
                             </HStack>
                             <HStack>
                                 <Text>Appontment Time :- </Text>
-                                <Text>{appointment.__parentArray[index++].appointmentTime}</Text>
+                                <Text>{appointment.appointmentTime}</Text>
                             </HStack>
                             <HStack>
                                 <Text>Doctor Name :- </Text>
@@ -63,12 +64,19 @@ const UserAppointments = () => {
                             </HStack>
                             <HStack>
                                 <Text>NextAppointment :- </Text>
-                                <Text>{appointment.__parentArray[index++].nextVisitTime}</Text>
+                                <Text>{appointment.nextVisitTime}</Text>
                             </HStack>
                         </VStack>
                     </AccordionPanel>
                 </AccordionItem>
-                })   
+                }):
+                <Spinner
+                    thickness='4px'
+                    speed='0.65s'
+                    emptyColor='gray.200'
+                    color='blue.500'
+                    size='xl'
+                />
             }
             </Accordion>
         </VStack>

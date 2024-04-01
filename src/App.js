@@ -13,6 +13,7 @@ import AdminProfile from './components/Admin/AdminProfile';
 import UserProfile from './components/User/UserProfile';
 import { useEffect,useState,useContext } from 'react';
 import { AuthContext } from './AuthProvider';
+import NearDoctor from './components/Doctors/NearDoctor';
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           <Route path='/Lab-Tests' element={<UserProfile url='/labtests' status={status}/>}/>
           <Route path='/Reports' element={<UserProfile url='/reports'  status={status}/>}/>
           <Route path="/Appointment" element={<UserProfile url="/appointment" status={status}/>}/>
+          <Route path='/nearDoctor' element={<NearDoctor/>}/>
         </Routes>
       </Router>
     </div>

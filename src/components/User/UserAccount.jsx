@@ -162,7 +162,7 @@ const UserAccount = () => {
           }
           
         </Stack>
-        <Button variant="solid" type='submit' colorScheme={"blue"} width={"30%"} alignSelf={"center"} >
+        <Button variant="solid" type='submit' colorScheme={"blue"} width={"30%"} alignSelf={"center"} mb={"1rem"}>
           Save Changes
         </Button>
         </form>

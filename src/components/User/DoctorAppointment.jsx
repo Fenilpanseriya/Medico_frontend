@@ -1,6 +1,7 @@
 import { Box, Button, HStack, Heading, Input, Stack,Text, VStack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { Axios } from '../../Axios'
+import { Typography } from '@mui/material'
 
 const DoctorAppointment = () => {
 
@@ -72,7 +73,7 @@ const DoctorAppointment = () => {
     <Stack spacing={"1rem"} minHeight={"100vh"} height={"100%"} width={"100%"}  padding={"1rem"} >
       <Heading children="Todays Appointment" color={"blue.900"} mb={"8"}/>
       {
-        appointments?.map((appointment)=>{
+       appointments.length>0 ?  appointments.map((appointment)=>{
           return <Box  bgColor={"#dbdff4"} style={{ boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",width:"80%",justifySelf:"center",margin:"0 auto" }} borderRadius="lg" p={"3"} >
               <VStack alignItems={"flex-start"}>
               <Text >
@@ -105,7 +106,10 @@ const DoctorAppointment = () => {
              
 
           </Box>
-        })
+        }):
+        <Heading py={"2rem"} color="blue.600" opacity={"0.25"}>
+          No appointment for today
+        </Heading>
       }
     </Stack>
   )
