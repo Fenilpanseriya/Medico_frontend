@@ -8,6 +8,7 @@ import { ColorModeScript } from '@chakra-ui/react';
 import { AuthContext, AuthProvider } from './AuthProvider';
 import { store } from "../src/components/redux/store"
 import { Provider } from 'react-redux'
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
@@ -15,12 +16,16 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
  
     <ChakraProvider theme={theme}>
+     
       <Provider store={store}>
       <ColorModeScript/>
         <AuthProvider>
+       
           <App />
+          
         </AuthProvider>
         </Provider>
+        
     </ChakraProvider>
   
 );
