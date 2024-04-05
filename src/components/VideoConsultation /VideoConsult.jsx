@@ -1,15 +1,17 @@
 import { Button, Input, Stack, VStack } from '@chakra-ui/react'
 import React, { useContext, useEffect, useState } from 'react'
 import { SocketContext, useSocket } from '../Providers/Socket'
+import { useNavigate } from 'react-router'
 
 const VideoConsult = () => {
     const [email,setEmail]=useState("")
     const [room,setRoom]=useState("")
     const {socket}=useSocket()
-    
+    const navigate=useNavigate();
     const handleRoomJoin=()=>{
         console.log(socket)
         socket?.emit("join-room",{emailId:email,roomId:room})
+        navigate(`/room/${room}`)
     }
     const handleRoomJoined=({roomId})=>{
         console.log("joined room "+roomId)

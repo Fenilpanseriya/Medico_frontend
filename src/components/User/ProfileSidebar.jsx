@@ -44,7 +44,8 @@ const ProfileSidebar = ({ status }) => {
       spacing={"1rem"}
       minHeight={"100vh"}
       height={"100%"}
-      className={!isMobile && "main-sidebar-stack"}
+      className={!isMobile ? "main-sidebar-stack":"sidebar-container"}
+      
     >
       {!isMobile ? (
         <Box className="profile-sidebar">

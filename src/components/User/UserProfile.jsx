@@ -19,7 +19,7 @@ const UserProfile = ({url="/account",status}) => {
   return (
     <div style={{backgroundColor:"whitesmoke"}}>
         <Header status={status} />
-        <Stack direction={["column","row"]} padding={"1rem"} minHeight={"100vh"} height={"100%"} maxWidth={"1250px"} margin={"0 auto"} bgColor={"grey"}>
+        <Stack direction={["column","row"]} padding={"1rem"} className='profile-container' maxWidth={"1250px"} margin={"0 auto"} bgColor={"grey"}>
             <ProfileSidebar status={status}/>
             <Box width={"100%"} bgColor={"whitesmoke"}  height={"100%"}minHeight={"100vh"}>
                 {
