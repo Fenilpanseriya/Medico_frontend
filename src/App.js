@@ -15,10 +15,11 @@ import { useEffect,useState,useContext } from 'react';
 import { AuthContext } from './AuthProvider';
 import NearDoctor from './components/Doctors/NearDoctor';
 
-import VideoConsult from './components/VideoConsultation /VideoConsult';
-import { SocketProvider } from './components/Providers/Socket';
-import { PeerProvider } from './components/VideoConsultation /Peer';
-import { Room } from '@mui/icons-material';
+// import VideoConsult from './components/VideoConsultation /VideoConsult';
+// import { SocketProvider } from './components/Providers/Socket';
+// import { PeerProvider } from './components/VideoConsultation /Peer';
+// import Room from './components/VideoConsultation /Room';
+//import { Room } from '@mui/icons-material';
 
 function App() {
   //const [status,setStatus]=useState("logout")
@@ -30,8 +31,8 @@ function App() {
   return (
     <div className="App" style={{height:"100vh"}}>
       <Router>
-        <SocketProvider>
-        <PeerProvider>
+        {/* <SocketProvider>
+        <PeerProvider> */}
         <Routes>
           <Route path='/' element={<Home status={status} />}/>
           <Route path='/login' element={<Login/>}/>
@@ -52,11 +53,11 @@ function App() {
           <Route path='/Reports' element={<UserProfile url='/reports'  status={status}/>}/>
           <Route path="/Appointment" element={<UserProfile url="/appointment" status={status}/>}/>
           <Route path='/nearDoctor' element={<NearDoctor/>}/>
-          <Route path="/videoConsultant" element={<VideoConsult/>}/>
-          <Route path="/room/:id" element={<Room/>}/>
+          {/* <Route path="/videoConsultant" element={<VideoConsult/>}/>
+          <Route path="/room/:id" element={<Room/>}/> */}
         </Routes>
-        </PeerProvider>
-        </SocketProvider>
+        {/* </PeerProvider>
+        </SocketProvider> */}
       </Router>
     </div>
   );

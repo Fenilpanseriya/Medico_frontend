@@ -47,7 +47,7 @@ const AuthFormat = ({ role = "" }) => {
     phoneNumber:"",
     gender: "",
     address: "",
-    avatar: "",
+    file: "",
     doctorDegree: [],
     hospital:[]
   });
@@ -89,7 +89,7 @@ const AuthFormat = ({ role = "" }) => {
     reader.onloadend = () => {
       setFormData({
         ...formData,
-        avatar: reader.result,
+        file: {buffer:reader.result,originalname:file.name},
       });
     };
     reader.readAsDataURL(file);
