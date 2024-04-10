@@ -1,7 +1,7 @@
 import { Box, Stack ,Text,Image,Button} from '@chakra-ui/react'
 import React, { useState,useEffect, useContext} from 'react'
 import health from "../assets/header_logo.png"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { routes } from './Home/routes'
 import "../../src/App.css"
 import { Box as Boxes} from '@mui/material'
@@ -29,11 +29,14 @@ const Header = ({status}) => {
       
     }
   }
+  const navigate=useNavigate()
   const handleLogout=()=>{
     
     alert("logout done")
     localStorage.setItem("status","logut")
     logout()
+    navigate("/login")
+
   } 
   
   useEffect(() => {

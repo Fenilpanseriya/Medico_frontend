@@ -87,12 +87,12 @@ const UserAccount = () => {
   return (
     <Stack spacing={"2rem"} direction={["column"]} width={"100%"}>
         <Stack spacing={"1rem"} alignItems={"center"} width={"100%"}>
-            <Avatar src="https://avatars.githubusercontent.com/u/6037598?v=4" height={"200px"} width={"200px"} />
+            <Avatar src={formData.avatar} height={"200px"} width={"200px"} />
             <Button variant={"solid"} colorScheme='blue'>
               Change Profile
             </Button>
         </Stack>
-        <Heading children="User Details" textAlign={"center"} color={"blue.900"} mt={"4"} />
+        <Heading children="User Details" textAlign={"center"} color={"blue.900"} mt={"2"} />
         <form style={{width:"100%"}} onSubmit={handleSaveChanges}> 
         <Stack width={"100%"} spacing={"1rem"} direction={"row"} display={"flex"} flexWrap={"wrap"} padding={"0.75rem"} justifyContent={"center"} alignItems={"center"}>
           

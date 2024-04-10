@@ -42,8 +42,7 @@ const ProfileSidebar = ({ status }) => {
   return (
     <Stack
       spacing={"1rem"}
-      minHeight={"100vh"}
-      height={"100%"}
+      
       className={!isMobile ? "main-sidebar-stack":"sidebar-container"}
       
     >

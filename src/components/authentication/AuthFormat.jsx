@@ -46,6 +46,7 @@ const AuthFormat = ({ role = "" }) => {
     birthDate: "",
     phoneNumber:"",
     gender: "",
+    prev:"",
     address: "",
     file: "",
     doctorDegree: [],
@@ -85,14 +86,18 @@ const AuthFormat = ({ role = "" }) => {
 
   const handleImage = (e) => {
     const file = e.target.files[0];
+    console.log(file)
     const reader = new FileReader();
+    reader.readAsDataURL(file);
+    
     reader.onloadend = () => {
       setFormData({
         ...formData,
-        file: {buffer:reader.result,originalname:file.name},
+        prev:reader.result,
+        file:file
       });
     };
-    reader.readAsDataURL(file);
+    
   };
 
   const handleChangeHospital = (selectedValues) => {
@@ -105,13 +110,19 @@ const AuthFormat = ({ role = "" }) => {
 };
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log((formData))
-    
+    // console.log((formData))
+    let Formdata=new FormData();
+    for (const key in formData) {
+        if (formData.hasOwnProperty(key)) {
+          Formdata.append(key,formData[key])
+
+        }
+    }
     let url=role==="doctor"?"/registerDoctor":"/register";
   
-    const res=await Axios.post(url,formData,{
+    const res=await Axios.post(url,Formdata,{
       headers:{
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
       withCredentials:true
     })
@@ -229,7 +240,7 @@ const AuthFormat = ({ role = "" }) => {
 
             <FormControl isRequired mt={8}>
               <FormLabel>Avatar</FormLabel>
-              <Avatar name="avatar" src={formData.avatar} height={"10vw"} width={"10vw"}/>
+              <Avatar name="avatar" src={formData.prev} height={"10vw"} width={"10vw"}/>
               <Input
                 mt={"0.5rem"}
                 type="file"

@@ -233,6 +233,13 @@ textarea:focus, input:focus{
   min-height:100vh;
   background-color: whitesmoke;
 }
+
+.sidebar-container{
+  height: 35px;
+  max-height:  35px;
+  
+}
+
 .profile-container{
   min-height: 100vh;
   height:100%
@@ -240,7 +247,7 @@ textarea:focus, input:focus{
 @media screen and (max-width: 700px) {
   .profile-sidebar{
     display: none;
-   
+    height:2rem;
   }
   
   
