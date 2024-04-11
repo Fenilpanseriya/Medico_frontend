@@ -34,7 +34,7 @@ const Reports = () => {
   return (
     <Stack alignItems={"center"} height={"100vh"} width={"100%"}>
       <Heading children="All Reports" color={"blue.800"} textAlign={"center"} mt={"4"}/>
-      <Input type='file' name='report'  onChange={handleFileChange} width={"40%"} margin={"0 auto"} justifyContent={"center"} mt={"2"}/>
+      <Input type='file' name='report'  onChange={handleFileChange} width={"40%"} margin={"0 auto"} justifyContent={"center"} mt={"8"}/>
       <Button onClick={uploadReport} width={"30%"} color={"blue.600"} mb={"2"}>
           Upload Report
       </Button>

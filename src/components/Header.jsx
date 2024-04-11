@@ -14,7 +14,9 @@ const Header = ({status}) => {
   const [isMobile,setIsMobile]=useState(false)
   const [isOpen, setIsOpen] = useState(false);
   const {  login, logout } = useContext(AuthContext);
-  
+  const role=localStorage.getItem("role")
+ 
+
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
   };
@@ -65,7 +67,7 @@ const Header = ({status}) => {
                         <><Button variant={"ghost"} color={"blue.600"} _hover={{borderBottom:"2px solid rgba(126, 159, 251, 0.8)" }} style={{textDecoration:"link",padding:"0.5rem"}} onClick={handleLogout}>
                           Logout
                         </Button>
-                        <Link to="/profile"key="/profile">
+                        <Link to={role==="admin"?"/admin-profile":"/profile"} key="/profile">
                           <Button variant={"ghost"} color={"blue.600"} _hover={{borderBottom:"2px solid rgba(126, 159, 251, 0.8)" }} style={{textDecoration:"link",padding:"0.5rem"}} >
                             Profile
                           </Button>

@@ -118,8 +118,8 @@ const AuthFormat = ({ role = "" }) => {
 
         }
     }
-    let url=role==="doctor"?"/registerDoctor":"/register";
-  
+     let url=role==="doctor"?"/registerDoctor":(role==="admin"?"/admin/register":"/register");
+     alert(url)
     const res=await Axios.post(url,Formdata,{
       headers:{
         "Content-Type": "multipart/form-data",

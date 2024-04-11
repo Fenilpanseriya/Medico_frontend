@@ -5,7 +5,9 @@ import { admin } from './sampleAdmin'
 import Header from '../Header'
 import { Link } from 'react-router-dom'
 import AddHospital from './AddHospital'
-import { AuthContext } from '../../AuthProvider'
+import ResetPassword from './ResetPassword'
+import AddMedicine from './AddMedicine'
+
 const AdminProfile = () => {
     //const { status, login, logout } = useContext(AuthContext);
     let status=localStorage.getItem("status")
@@ -13,7 +15,7 @@ const AdminProfile = () => {
     const [openModal,setOpenModal]=useState(false)
     const [selectedOptions, setSelectedOptions] = useState([]);
     const { isOpen, onOpen, onClose }=useDisclosure();
-
+    const [modal,setModal]=useState("")
     function calculateAge(birthdate) {
         const today = moment();
         const birthdateMoment = moment(birthdate);
@@ -24,6 +26,7 @@ const AdminProfile = () => {
     const handleModal=(e)=>{
         e.preventDefault()
         setOpenModal(true)
+        setModal(e.target.name)
         onOpen()
     }
     useState(()=>{
@@ -56,24 +59,37 @@ const AdminProfile = () => {
         </Stack>
         <Stack direction={["column","row"]} spacing={"1rem"} width={"100%"} justifyContent={"center"}>
                 
-                <Link to={"/reset-password"} variant={"ghost"} >
-                    <Button variant={"solid"} colorScheme='blue' p={4}>
-                        Reset Password
-                    </Button>
-                </Link>
-                <Link to={"/change-profile-photo"}>
-                    <Button variant={"solid"} colorScheme='blue' p={4}>
-                        Change Profile Picture
-                    </Button>
-                </Link>
-                <Button variant={"solid"}  colorScheme='blue' onClick={handleModal} p={4}>
+                
+                <Button variant={"solid"} colorScheme='blue' p={4} name="Reset Password" onClick={handleModal}>
+                    Reset Password
+                </Button>
+                
+              
+                <Button variant={"solid"} name="change-profile-photo" colorScheme='blue' p={4} onClick={handleModal}>
+                    Change Profile Picture
+                </Button>
+                
+                <Button variant={"solid"} name='add-hospital' colorScheme='blue' onClick={handleModal} p={4}>
                     Add Hospital
+                </Button>
+                <Button variant={"solid"} name='add-medicine' colorScheme='blue' onClick={handleModal} p={4}>
+                    Add Medicine
                 </Button>
             </Stack>
         {
-            openModal && <AddHospital selectedOptions={selectedOptions} isOpen={isOpen} onClose={onClose} setOpenModal={setOpenModal} setSelectedOptions={setSelectedOptions}/>
+            openModal && modal==="add-hospital" && <AddHospital selectedOptions={selectedOptions} isOpen={isOpen} onClose={onClose} setOpenModal={setOpenModal} setSelectedOptions={setSelectedOptions}/>
         }
-            </Stack>
+        {
+            openModal && modal==="change-profile-photo" && <AddHospital name="change-profile-photo"  isOpen={isOpen} onClose={onClose} setOpenModal={setOpenModal} />
+        }
+        {
+            openModal && modal==="Reset Password" && <ResetPassword name="Reset Password"  isOpen={isOpen} onClose={onClose} setOpenModal={setOpenModal}/>
+        }
+        {
+            openModal && modal==="add-medicine" && <AddMedicine isOpen={isOpen} onClose={onClose} setOpenModal={setOpenModal}/>
+
+        }
+    </Stack>
   )
 }
 
